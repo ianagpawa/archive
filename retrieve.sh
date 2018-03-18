@@ -1,11 +1,10 @@
 #!/bin/bash
 
+location=$1
 
 getRepos(){
     filename='repo_names.txt'
     filelines=$(cat $filename)
-
-    location='/media/onyx/Daedra/archive'
 
     for line in $filelines
     do
