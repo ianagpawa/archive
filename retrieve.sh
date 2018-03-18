@@ -9,12 +9,15 @@ getRepos(){
 
     for line in $filelines
     do
-        if [ -d "$location/$line" ]; then
-            echo "$location/$line"
+        folder=$location/$line
+        if [ -d "$folder" ]; then
+            cd $folder
+            git pull
+        else
+            address="git@github.com:ianagpawa/$line"
+            cd $location
+            git clone $address
         fi
-
-        # address="git@github.com:ianagpawa/$line"
-
     done
 }
 
