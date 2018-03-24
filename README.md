@@ -17,7 +17,7 @@ $   sh retrieve.sh *FOLDER_LOCATION*
 Within the project folder, you will find the following files:
 
 ```
-catalog/
+archive/
     ├── README.md
     ├── repo_names.txt
     └── retrieve.sh
