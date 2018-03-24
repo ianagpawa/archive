@@ -2,6 +2,10 @@
 
 location=$1
 
+if [ ! -d "$location" ]; then
+    mkdir $location
+fi
+
 getRepos(){
     filename='repo_names.txt'
     filelines=$(cat $filename)
