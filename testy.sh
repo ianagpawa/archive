@@ -5,7 +5,7 @@
 # echo ${json}
 
 updatedRepos(){
-    json=`curl -s -X GET https://api.github.com/users/ianagpawa/repos?type=all > repos.json`
+    json=`curl -s -X GET https://api.github.com/users/ianagpawa/repos?per_page=75 > repos.json`
 
     filename='repos.json'
     json=$(cat $filename)
