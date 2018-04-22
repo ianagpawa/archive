@@ -7,19 +7,36 @@ if [ ! -d "$location" ]; then
 fi
 
 getRepos(){
-    filename='repo_names.txt'
-    filelines=$(cat $filename)
+    json=`curl -s -X GET https://api.github.com/users/ianagpawa/repos?per_page=100 > repos.json`
 
-    for line in $filelines
+    filename='repos.json'
+    json=$(cat $filename)
+    projects=$(echo ${json} | jq '.[] .name')
+    for project in $projects
     do
-        folder=$location/$line
+        folder=$location/$(echo ${project} | tr -d '"')
         if [ -d "$folder" ]; then
             cd $folder
+            echo " "
+            echo "**************************************************************"
+            echo "Git pull ${project}"
             git pull
+            cd ..
+            echo "Finished pulling updating ${project}"
+            echo "**************************************************************"
+            echo " "
+
         else
-            address="git@github.com:ianagpawa/$line"
+            address="git@github.com:ianagpawa/$(echo ${project} | tr -d '"')"
             cd $location
+            echo " "
+            echo "**************************************************************"
+            echo "Cloning ${project}"
             git clone $address
+            cd ..
+            echo "Finished cloning ${project}"
+            echo "**************************************************************"
+            echo " "
         fi
     done
 }
